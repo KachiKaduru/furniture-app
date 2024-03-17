@@ -1,0 +1,62 @@
+nav {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+
+  .container {
+    padding: 1rem 1.6rem;
+    background-color: #fff;
+    // z-index: 10;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav-btn {
+    display: grid;
+    cursor: pointer;
+
+    .img-div {
+      justify-self: center;
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-content: center;
+    }
+
+    img {
+      width: fit-content;
+      height: 2.2rem;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: "SF Pro Text", sans-serif;
+    }
+  }
+
+  .home {
+    .img-div {
+      img {
+        filter: grayscale(1);
+      }
+    }
+  }
+
+  .current-page {
+    color: $brand-color-1;
+
+    .img-div {
+      background: darken($brand-color-1, 20);
+    }
+
+    img {
+      background-color: #fff;
+      mix-blend-mode: screen;
+    }
+  }
+}

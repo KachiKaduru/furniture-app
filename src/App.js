@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+import HomeScreen from "./components/HomeScreen";
+import NavBar from "./components/NavBar";
+import DetailsScreen from "./components/DetailsScreen";
+
+import { chairItems } from "./components/ImagesComponent";
+import { tableItems } from "./components/ImagesComponent";
+import { sofaItems } from "./components/ImagesComponent";
+import { lampItems } from "./components/ImagesComponent";
+
+const furnituresBarArr = [
+  { id: 1, description: "Chairs", list: chairItems },
+  { id: 2, description: "Tables", list: tableItems },
+  { id: 3, description: "Sofas", list: sofaItems },
+  { id: 4, description: "Lamps", list: lampItems },
+];
+
+export default function App() {
+  const [page, setPage] = useState(false);
+  const [clickedItem, setClickedItem] = useState(null);
+  const [list, setList] = useState(chairItems);
+
+  function handlePageChange() {
+    setPage(!page);
+  }
+
+  function handleClickedItem(theClicked) {
+    setClickedItem(theClicked);
+    handlePageChange();
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <NavBar />
+
+      <div className="container">
+        <HomeScreen
+          onClickedItem={handleClickedItem}
+          furnituresBarArr={furnituresBarArr}
+          list={list}
+          setList={setList}
+        />
+      </div>
+
+      {page && (
+        <DetailsScreen
+          clickedItem={clickedItem}
+          onPageChange={handlePageChange}
+          setClickedItem={setClickedItem}
+          list={list}
+          setList={setList}
+        />
+      )}
     </div>
   );
 }
-
-export default App;
